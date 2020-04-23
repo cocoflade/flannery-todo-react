@@ -13,12 +13,21 @@ class App extends React.Component {
       { task: "paint fence", estimated_time: 70, priority: 1 },
     ],
   };
+
+  addTaskClick = () => {};
+
+  handleDelete = (index) => {
+    const copyArr = [...this.state.to_do];
+    copyArr.splice(index, 1);
+    this.setState({ to_do: copyArr });
+  };
+
   render() {
     return (
       <div className="App">
         <Header amount={this.state.to_do.length} />
 
-        <ToDoList to_do={this.state.to_do} />
+        <ToDoList to_do={this.state.to_do} deleteTask={this.handleDelete} />
       </div>
     );
   }

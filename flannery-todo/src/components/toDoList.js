@@ -1,7 +1,7 @@
 import React from "react";
 
 function ToDoList(props) {
-  const { to_do } = props;
+  const { to_do, deleteTask } = props;
 
   return (
     <ol>
@@ -10,7 +10,7 @@ function ToDoList(props) {
       {to_do.map(({ task, estimated_time, priority }) => {
         return (
           <li key={task}>
-            <p>
+            <p onClick={deleteTask}>
               {task}
               {estimated_time}
               {priority}
