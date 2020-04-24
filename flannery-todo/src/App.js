@@ -5,6 +5,7 @@ import ToDoList from "./components/toDoList";
 
 class App extends React.Component {
   state = {
+    sort: false,
     to_do: [
       { task: "Wash dishes", estimated_time: 10, priority: 80 },
       { task: "Clean car", estimated_time: 60, priority: 40 },
@@ -17,21 +18,35 @@ class App extends React.Component {
   addTaskClick = () => {};
 
   handleDelete = (index) => {
-    const copyArr = [...this.state.to_do];
-    copyArr.splice(index, 1);
-    this.setState({ to_do: copyArr });
+    this.setState((currState) => {
+      const copyArr = [...currState.to_do];
+      copyArr.splice(index, 1);
+      return { to_do: copyArr };
+    });
   };
 
   increasePriority = () => {};
 
-  sortByPriority = () => {};
+  sortByPriority = () => {
+    this.setState((currState) => {
+      const newArr = [...currState.to_do];
+      newArr.sort((a, b) => b.priority - a.priority);
+      console.log(newArr);
+      return { to_do: newArr };
+    });
+  };
 
   render() {
     return (
       <div className="App">
         <Header amount={this.state.to_do.length} />
 
-        <ToDoList to_do={this.state.to_do} deleteTask={this.handleDelete} />
+        <ToDoList
+          to_do={this.state.to_do}
+          sort={this.state.sort}
+          deleteTask={this.handleDelete}
+          sortBy={this.sortByPriority}
+        />
       </div>
     );
   }

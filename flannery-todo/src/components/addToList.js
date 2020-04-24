@@ -2,7 +2,6 @@ import React from "react";
 
 class AddTask extends React.Component {
   state = {
-    sortPriority: false,
     to_do: [{ task: "", estimated_time: "", priority: "" }],
   };
 
